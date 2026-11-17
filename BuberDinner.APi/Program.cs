@@ -7,6 +7,9 @@ using BuberDinner.infrastructure.Authintication;
 using BuberDinner.Application.Command.interfaces;
 using BuberDinner.infrastructure.Services;
 using BuberDinner.Application.Command.service;
+using BuberDinner.Application.Command.Persistence;
+using BuberDinner.infrastructure.Persistence;
+using BuberDinner.Contracts.Authintication;
 
 
 
@@ -19,7 +22,7 @@ var builder = WebApplication.CreateBuilder(args);
     builder.Services.AddSingleton<IJwtGenerator, JwtTokenGenerator>();
     builder.Services.AddSingleton<IdataTimeProvider, dataTimeProvider>();
     builder.Services.Configure<JwtSetting>(builder.Configuration.GetSection(JwtSetting.SectionName)); // operation to bind the JwtSetting class with the values from appsettings.json file
-
+    builder.Services.AddScoped<IUserRepositiory, UserRepositiory>();
 }
 
 
@@ -27,7 +30,7 @@ var builder = WebApplication.CreateBuilder(args);
 //Middleware configuration
 var app = builder.Build();
 {
-    
+
     app.UseHttpsRedirection();
 
     app.UseAuthorization();
