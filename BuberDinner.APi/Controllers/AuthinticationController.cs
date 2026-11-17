@@ -26,10 +26,10 @@ namespace BuberDinner.APi.Controllers
 
             var response = new AuthResponse
             {
-                Id = authinticationResult.Id,
-                FirstName = authinticationResult.FirstName,
-                LastName = authinticationResult.LastName,
-                Email = authinticationResult.Email,
+                Id = authinticationResult.user.Id,
+                FirstName = authinticationResult.user.FirstName,
+                LastName = authinticationResult.user.LastName,
+                Email = authinticationResult.user.Email,
                 Token = authinticationResult.Token
             };
             return Ok(response);
@@ -45,13 +45,13 @@ namespace BuberDinner.APi.Controllers
 
             var response = new AuthResponse
             {
-                Id = authinticationResult.Id,
-                FirstName = authinticationResult.FirstName,
-                LastName = authinticationResult.LastName,
-                Email = authinticationResult.Email,
+                Id = authinticationResult.user.Id,
+                FirstName = authinticationResult.user.FirstName,
+                LastName = authinticationResult.user.LastName,
+                Email = authinticationResult.user.Email,
                 Token = authinticationResult.Token
             };
-            return Ok(authinticationResult);
+            return Ok(response);
         }
 
 
