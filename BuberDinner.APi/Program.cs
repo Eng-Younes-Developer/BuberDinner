@@ -3,6 +3,16 @@ using BuberDinner.infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using BuberDinner.Application.services.Authintication;
+using BuberDinner.infrastructure.Authintication;
+using BuberDinner.Application.Command.interfaces;
+using BuberDinner.infrastructure.Services;
+using BuberDinner.Application.Command.service;
+using BuberDinner.Application.Command.Persistence;
+using BuberDinner.infrastructure.Persistence;
+using BuberDinner.Contracts.Authintication;
+using BuberDinner.APi.Middleware;
+
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,7 +20,10 @@ var builder = WebApplication.CreateBuilder(args);
 {
     builder.Services.AddControllers();
     builder.Services.AddScoped<IAuthinticationService, AuthinticationService>();
-    
+    builder.Services.AddSingleton<IJwtGenerator, JwtTokenGenerator>();
+    builder.Services.AddSingleton<IdataTimeProvider, dataTimeProvider>();
+    builder.Services.Configure<JwtSetting>(builder.Configuration.GetSection(JwtSetting.SectionName)); // operation to bind the JwtSetting class with the values from appsettings.json file
+    builder.Services.AddScoped<IUserRepositiory, UserRepositiory>();
 }
 
 
@@ -19,6 +32,7 @@ var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
 {
     
+    app.UseMiddleware<ErrorHandlingMiddleware>(); //must be the first middleware in the pipeline to catch exceptions from other middlewares and controllers
     app.UseHttpsRedirection();
 
     app.UseAuthorization();
