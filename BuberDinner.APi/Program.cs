@@ -10,6 +10,7 @@ using BuberDinner.Application.Command.service;
 using BuberDinner.Application.Command.Persistence;
 using BuberDinner.infrastructure.Persistence;
 using BuberDinner.Contracts.Authintication;
+using BuberDinner.APi.Middleware;
 
 
 
@@ -30,7 +31,8 @@ var builder = WebApplication.CreateBuilder(args);
 //Middleware configuration
 var app = builder.Build();
 {
-
+    
+    app.UseMiddleware<ErrorHandlingMiddleware>(); //must be the first middleware in the pipeline to catch exceptions from other middlewares and controllers
     app.UseHttpsRedirection();
 
     app.UseAuthorization();
