@@ -1,28 +1,35 @@
 ﻿using BuberDinner.Application.services.Authintication;
 using BuberDinner.Contracts.Authintication;
 using Microsoft.AspNetCore.Mvc;
+using BuberDinner.Application.services.Authintication.ResponseAuth;
+using MediatR;
+using BuberDinner.Application.services.Authintication.Commands.Register;
+using BuberDinner.Application.services.Authintication.Queries.Login;
 namespace BuberDinner.APi.Controllers
+
 {
     [ApiController]
     [Route("Authintication")]
     public class AuthinticationController : ControllerBase
     {
-        private readonly IAuthinticationService _authinticationService;
+        private readonly ISender _sender ;
 
-        public AuthinticationController(IAuthinticationService authinticationService)
+        public AuthinticationController(ISender sender)
         {
-            _authinticationService = authinticationService;
+
+            _sender = sender;
         }
     
         [HttpPost]
         [Route("Register")]
-        public IActionResult Register(Register request)
+        public async Task<IActionResult> Register(Register request)
         {
-            var authinticationResult = _authinticationService.Register(
+            var command = new RegisterCommand(
                 request.FirstName,
-                request.LastName, 
-                request.Email, 
+                request.LastName,
+                request.Email,
                 request.Password);
+            var authinticationResult = await _sender.Send(command);
 
             var response = new AuthResponse
             {
@@ -37,11 +44,13 @@ namespace BuberDinner.APi.Controllers
 
         [HttpPost]  
         [Route("Login")]
-        public IActionResult Login(LoginRequest request)
+        public async Task<IActionResult> Login(LoginRequest request)
         {
-            var authinticationResult = _authinticationService.Login(
-                request.Email, 
+           var query = new LoginQuery(
+                request.Email,
                 request.Password);
+
+           var authinticationResult = await _sender.Send(query);
 
             var response = new AuthResponse
             {

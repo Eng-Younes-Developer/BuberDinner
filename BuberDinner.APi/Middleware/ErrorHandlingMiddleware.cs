@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 
 namespace BuberDinner.APi.Middleware
 {
-    public class ErrorHandlingMiddleware
+    public class ErrorHandlingMiddleware 
     {
         private readonly RequestDelegate _next;
 

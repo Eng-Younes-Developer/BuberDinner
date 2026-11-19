@@ -3,9 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace BuberDinner.Application.services.Authintication
+namespace BuberDinner.Application.services.Authintication.ResponseAuth
 {
-    public record AuthinticationResult
+    public record AuthinticationResult 
     (
         User user,
         string Token
