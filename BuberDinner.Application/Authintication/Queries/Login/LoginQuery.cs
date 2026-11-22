@@ -1,10 +1,10 @@
-﻿using BuberDinner.Application.services.Authintication.ResponseAuth;
+﻿using BuberDinner.Application.Authintication.ResponseAuth;
 using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace BuberDinner.Application.services.Authintication.Queries.Login
+namespace BuberDinner.Application.Authintication.Queries.Login
 {
     public record LoginQuery
     (

@@ -1,10 +1,10 @@
-﻿using BuberDinner.Application.services.Authintication.ResponseAuth;
+﻿using BuberDinner.Application.Authintication.ResponseAuth;
 using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace BuberDinner.Application.services.Authintication.Commands.Register
+namespace BuberDinner.Application.Authintication.Commands.Register
 {
     public record RegisterCommand(
         string FirstName,

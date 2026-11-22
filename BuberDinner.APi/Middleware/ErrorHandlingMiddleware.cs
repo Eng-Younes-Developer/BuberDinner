@@ -1,6 +1,13 @@
 ﻿using System.Net;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Linq;
+using BuberDinner.Application.Command.Behavior;
+using BuberDinner.Application.Command.interfaces;
+using MediatR;
+using FluentValidation;
+using BuberDinner.Application.Authintication.Commands.Register;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace BuberDinner.APi.Middleware
 {
@@ -19,6 +26,19 @@ namespace BuberDinner.APi.Middleware
             {
                 await _next(context); //move to the next middleware in the pipeline
             }
+            
+            catch (ValidationException ex)
+            {
+                context.Response.StatusCode = StatusCodes.Status400BadRequest; // 400 if validation error
+
+                var errors = ex.Errors.Select(error => new
+                {
+                    Property = error.PropertyName,
+                    Message = error.ErrorMessage
+                });
+                await context.Response.WriteAsync(JsonSerializer.Serialize(new { Errors = errors }));
+            }
+
             catch (Exception ex)
             {
                 await HandleExceptionAsync(context, ex); //occurs when an exception is thrown in the pipeline, and we handle it by returning a JSON response with an error message
