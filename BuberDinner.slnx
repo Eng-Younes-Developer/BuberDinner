@@ -1,7 +1,4 @@
 <Solution>
-  <Folder Name="/docs/">
-    <File Path="Api.md" />
-  </Folder>
   <Project Path="BuberDinner.APi/BuberDinner.APi.csproj" />
   <Project Path="BuberDinner.Application/BuberDinner.Application.csproj" />
   <Project Path="BuberDinner.Contracts/BuberDinner.Contracts.csproj" />
