@@ -1,10 +1,10 @@
-﻿using BuberDinner.Application.services.Authintication;
+﻿using BuberDinner.Application.Authintication;
 using BuberDinner.Contracts.Authintication;
 using Microsoft.AspNetCore.Mvc;
-using BuberDinner.Application.services.Authintication.ResponseAuth;
+using BuberDinner.Application.Authintication.ResponseAuth;
 using MediatR;
-using BuberDinner.Application.services.Authintication.Commands.Register;
-using BuberDinner.Application.services.Authintication.Queries.Login;
+using BuberDinner.Application.Authintication.Commands.Register;
+using BuberDinner.Application.Authintication.Queries.Login;
 namespace BuberDinner.APi.Controllers
 
 {
@@ -61,7 +61,7 @@ namespace BuberDinner.APi.Controllers
                 Token = authinticationResult.Token
             };
             return Ok(response);
-        }
+            }
 
 
     }

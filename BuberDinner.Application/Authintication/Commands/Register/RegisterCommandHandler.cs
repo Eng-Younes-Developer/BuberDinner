@@ -1,7 +1,6 @@
-﻿using BuberDinner.Application.Command.interfaces;
+﻿using BuberDinner.Application.Authintication.ResponseAuth;
+using BuberDinner.Application.Command.interfaces;
 using BuberDinner.Application.Command.Persistence;
-using BuberDinner.Application.services.Authintication.Commands.Register;
-using BuberDinner.Application.services.Authintication.ResponseAuth;
 using BuberDinner.Contracts.Authintication;
 using BuberDinner.Domain.Entities;
 using MediatR;
@@ -12,7 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 
 
-namespace BuberDinner.Application.services.Authintication.Commands.RegisterCommandHandler
+namespace BuberDinner.Application.Authintication.Commands.Register
 {
     public class RegisterCommandHandler : IRequestHandler<RegisterCommand, AuthinticationResult>
     {

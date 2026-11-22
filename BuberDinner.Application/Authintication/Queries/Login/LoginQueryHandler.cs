@@ -1,12 +1,12 @@
-﻿using BuberDinner.Application.Command.interfaces;
+﻿using BuberDinner.Application.Authintication.ResponseAuth;
+using BuberDinner.Application.Command.interfaces;
 using BuberDinner.Application.Command.Persistence;
-using BuberDinner.Application.services.Authintication.ResponseAuth;
 using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace BuberDinner.Application.services.Authintication.Queries.Login
+namespace BuberDinner.Application.Authintication.Queries.Login
 {
     public class LoginQueryHandler : IRequestHandler<LoginQuery, AuthinticationResult>
     {
